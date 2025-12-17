@@ -1,4 +1,4 @@
-# Шахматы
+# Шахматы. Нахождение цвета клеток по координатам
 """
 x = int(input())
 y = int(input())
@@ -12,7 +12,7 @@ else:
         print("white")
 """
 
-# Задание 1
+# Задание 1. Ход коня
 """
 x1 = int(input())
 y1 = int(input())
@@ -30,7 +30,7 @@ else:
         print("ne mozet")
 """
 
-# Задание 2
+# Задание 2. Сумма четных чисел от K до N
 """
 K = int(input("K"))
 N = int(input("N"))
@@ -42,7 +42,7 @@ for i in range(K, N + 1):
 print(sum)
 """
 
-# Задание 3
+# Задание 3. Сумма введенных чисел
 """
 nol = 0
 while True:
@@ -53,7 +53,7 @@ while True:
 print(nol)
 """
 
-# Задание 4
+# Задание 4. Факториал числа
 """
 N = int(input("N"))
 fact = 1
@@ -61,3 +61,4 @@ for i in range(1, N + 1):
     fact *= i
 print(fact)
 """
+
