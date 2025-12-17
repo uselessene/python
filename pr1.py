@@ -12,7 +12,7 @@ else:
         print("white")
 """
 
-# Задание 1. Ход коня
+# Задание 1. Ход шахматного коня
 """
 x1 = int(input())
 y1 = int(input())
@@ -61,4 +61,5 @@ for i in range(1, N + 1):
     fact *= i
 print(fact)
 """
+
 
