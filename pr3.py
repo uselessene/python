@@ -50,7 +50,7 @@ print(c, max_sum)
 """
 
 # Задание 3
-
+"""
 with open("40992.txt", "r") as f:
     n = f.readlines()
     n = [int(el) for el in n]
@@ -74,3 +74,4 @@ for i in range(len(n) - 1):
                 max_summa = s
 
 print(count, max_summa)
+"""
