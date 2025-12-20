@@ -1,12 +1,12 @@
 # Задание 1. Число Фибоначчи
 """
-N = int(input("N"))
-if (N <= 0):
+N = int(input())
+if (n <= 0):
     print("oshibka")
 else:
     l = [0, 1]
     
-    for i in range(N - 2):
+    for i in range(n - 2):
         new = l[0] + l[1]
         l[0] = l[1]
         l[1] = new
@@ -15,18 +15,18 @@ else:
 
 # Задание 2. Кузнечик и способы
 """
-N = int(input("N"))
-if N <= 0:
+n = int(input())
+if n <= 0:
     print("oshibka")
-elif N == 1:
+elif n == 1:
     print("1 sposob")
-elif N == 2:
+elif n == 2:
     print("2 sposoba")
-elif N == 3:
+elif n == 3:
     print("4 sposoba")
 else:
     l = [1, 2, 4]
-    for i in range(N - 3):
+    for i in range(n - 3):
         new = l[0] + l[1] + l[2]
         l[0] = l[1]
         l[1] = l[2]
@@ -85,7 +85,7 @@ coins = [[0, 1, 1, 1, 1, 1],
         [0, 40, 70, 0, 0, 1],
         [100, 0, 0, 0, 0, 1]]
 
-puti = [[[] for j in range(len(coins[0]))] for i in range(len(coins))]
+put = []
 
 for i in range(len(coins)):
     for j in range(len(coins[i])):
@@ -93,20 +93,19 @@ for i in range(len(coins)):
             continue
         elif i == 0:
             coins[i][j] = coins[i][j] + coins[i][j - 1]
-            puti[i][j] = puti[i][j-1] + ["вправо"]
+            put.append("вправо")
         elif j == 0:
             coins[i][j] = coins[i][j] + coins[i - 1][j]
-            puti[i][j] = puti[i-1][j] + ["вниз"]
+            put.append("вниз")
         else:
             if coins[i - 1][j] > coins[i][j - 1]:
                 coins[i][j] = coins[i - 1][j] + coins[i][j]
-                puti[i][j] = puti[i-1][j] + ["вниз"]
+                put.append("вниз")
             else:
                 coins[i][j] = coins[i][j - 1] + coins[i][j]
-                puti[i][j] = puti[i][j-1] + ["вправо"]
+                put.append("вправо")
 
-resultat = coins[-1][-1]
-put = puti[-1][-1]
+resultat = coins[i][j]
 
 print(resultat)
 print(put)
