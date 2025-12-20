@@ -30,13 +30,13 @@ else:
         print("ne mozet")
 """
 
-# Задание 2. Сумма четных чисел от K до N
+# Задание 2. Сумма четных чисел от k до n
 """
-K = int(input("K"))
-N = int(input("N"))
+k = int(input("k"))
+n = int(input("n"))
 sum = 0
 
-for i in range(K, N + 1):
+for i in range(k, n + 1):
     if i % 2 == 0:
         sum += i
 print(sum)
@@ -46,7 +46,7 @@ print(sum)
 """
 nol = 0
 while True:
-    num = int(input("chisla"))
+    num = int(input())
     if num == 0:
         break
     nol += num
@@ -55,11 +55,9 @@ print(nol)
 
 # Задание 4. Факториал числа
 """
-N = int(input("N"))
-fact = 1
-for i in range(1, N + 1):
-    fact *= i
-print(fact)
+n = int(input())
+factorial = 1
+for i in range(1, n + 1):
+    facttorial *= i
+print(factorial)
 """
-
-
