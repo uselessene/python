@@ -1,3 +1,5 @@
+# Рекурсивные функции
+
 # Задание 1. Исполнитель n преобразует число, записанное на экрне
 # У исполнителя есть три команды:
 # 1. Прибавить 1
@@ -72,4 +74,73 @@ def kolvo(start, finish):
 
 otvet = kolvo(2, 9) * kolvo(9, 18)
 print(otvet)
+"""
+
+# Обработка символьных строк
+# Задание 1. Определить длину самой длинной последовательности X
+"""
+with open("27686.txt", "r") as f:
+    n = f.readlines()
+max = 0
+count = 0
+
+for i in n:
+    for symbol in i:
+        if symbol == 'X':
+            count += 1
+            if count > max:
+                max = count
+        else:
+            count = 0
+print(max) 
+"""
+
+# Задание 2. Максимальное количество идущих подряд символов без XZZY
+"""
+with open("36037.txt", "r") as f:
+    n = f.readlines()
+max = 0
+count = 0
+text = ""
+
+for i in n:
+    text += i
+
+for i in range(len(text) - 3):
+    if text[i] == 'X' and text[i + 1] == 'Z' and text[i + 2] == 'Z' and text[i + 3] == 'Y':
+        if count > max:
+            max = count
+        count = 3
+    else:
+        count += 1
+        if count > max:
+            max = count
+print(max)
+"""
+
+# Задание 3. Количество групп из идущих подряд не менее 12 символов,
+# которые начинаются и заканчиваются буквой E и не содержат других букв E и букв F
+"""
+with open("46982.txt", "r") as f:
+    n = f.readlines()
+
+s = []
+for i in n:
+    for j in i:
+        if j != "":
+            s.append(j)
+count = 0
+
+for i in range(len(s)):
+    if s[i] == "E":
+        for j in range(i + 1, len(s)):
+            if s[j] == "F":
+                break
+
+            if s[j] == "E":
+                dlina = j - i + 1
+                if dlina >= 12:
+                    count = count + 1
+                break
+print(count)
 """
