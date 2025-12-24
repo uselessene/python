@@ -1,78 +1,95 @@
-# Двумерные массивы
+# Работа с таблицами
+# Задание 1. Черепашка с путем наоборот
 """
-with open ("39762.txt", "r") as f:
-    n = f.readlines()
-    n = [int(el) for el in n]
-print(n)
-"""
+import csv
+with open("36031.csv", "r") as f:
+    n = list(csv.reader(f))
+    l = []
+    for i in range(len(n)):
+        a = (n[i][0].split(';'))
+        a = [int(el) for el in a]
+        l.append(a)
 
-# Задание 1
-"""
-with open ("39762.txt", "r") as f:
-    n = f.readlines()
-    n = [int(el) for el in n]
-count = 0
-max_summa = 0
-for i in range(len(n) - 1):
-    if ((n[i] * n[i + 1]) % 15) == 0 and ((n[i] + n[i + 1]) % 7) == 0:
-        count += 1
-        if max_summa < n[i] + n[i + 1]:
-            max_summa = n[i] + n[i + 1]
-print(count, max_summa)
-"""
+coins = l[-1::-1]
+for i in range(len(coins)):
+    coins[i] = coins[i][-1::-1]
+put = []
 
-# Задание 2
-"""
-with open ("68279.txt", "r") as f:
-    n = f.readlines()
-    n = (int(el) for el in f)
-    max_el = 0
+for i in range(len(coins)):
+    for j in range(len(coins[i])):
+        if i == 0 and j == 0:
+            continue
+        elif i == 0:
+            coins[i][j] = coins[i][j] + coins[i][j - 1]
+            put.append("влево")
+        elif j == 0:
+            coins[i][j] = coins[i][j] + coins[i - 1][j]
+            put.append("вверх")
+        else:
+            if coins[i - 1][j] > coins[i][j - 1]:
+                coins[i][j] = coins[i - 1][j] + coins[i][j]
+                put.append("вверх")
+            else:
+                coins[i][j] = coins[i][j - 1] + coins[i][j]
+                put.append("влево")
 
-    for el in n:
-        if str(el)[-3:] == "562":
-            if max_el < el:
-                max_el = el
-    c = 0
-    n = []
-    max_sum = 0
-    for i in range(len(n)-3):
-        l = [n[i], n[i + 1], n[i + 2], n[i + 3]]
-        l5 = [el for el in l if len(str(el)) == 5]
-        lnot5 = [el for el in l if len(str(el)) != 5]
-        lcrat3 = [el for el in l if el % 3 == 0]
-        lcrat7 = [el for el in l if el % 7 == 0]
-        if len(l5) >= l and len(lnot5) >= 2:
-            if len (lcrat3) < len(lcrat7):
-                if sum(l) > max_el and sum(l) < max_el * 2:
-                    c += l
-                    if max_sum < sum(l):
-                        max_sum = sum(l)
-print(c, max_sum)
+resultat = coins[i][j]
+
+print(resultat)
+print(put)
 """
 
-# Задание 3
+# Задание 2. Среди семи чисел совпадают четыре числа.
+# Среднее значение неповторяющихся чисел больше суммы повторяющихся чисел.
 """
-with open("40992.txt", "r") as f:
-    n = f.readlines()
-    n = [int(el) for el in n]
-sum = 0
-count1 = 0
+import csv
+with open("59778.csv", "r") as f:
+    n = list(csv.reader(f))
+    l = []
 
-for i in n:
-    if i % 2 == 1:
-        sum += i
-        count1 += 1
-srednee = sum / count1
-count = 0
-max_summa = 0
+    for i in range(len(n)):
+        a = (n[i][0].split(';'))
+        a = [int(el) for el in a]
+        l.append(a)
+    a = l
+    count = 0
 
-for i in range(len(n) - 1):
-    if (n[i] % 5 == 0) or (n[i + 1] % 5 == 0):
-        if (n[i] < srednee) or (n[i + 1] < srednee):
-            count += 1
-            s = n[i] + n[i + 1]
-            if s > max_summa:
-                max_summa = s
+    for i in range(len(a)):
+        for j in range(len(a[i])):
+            if a[i].count(a[i][j]) == 4:
+                repeat = a[i][j]
+                x = []
+                for j in range(len(a[i])):
+                    if a[i][j] not in x and a[i][j] != repeat:
+                        x.append(a[i][j])
+                summa_repeat = 4 * repeat
+                average_sum = sum(x) / 3
+                if average_sum > summa_repeat:
+                    count += 1
+    print(count // 4)
+"""
 
-print(count, max_summa)
+# Задание 3. Максимальная сумма последовательных вещественных чисел
+"""
+import csv
+with open("29666.csv", "r") as f:
+    n = list(csv.reader(f))
+    l = []
+    for i in range(len(n)):
+        n[i] = float(n[i][0] + "." + n[i][1])
+        l.append(n[i])
+
+max = l[0]
+sum = l[0]
+
+for i in range(len(n)):
+    if l[i] < l[i - 1]:
+       sum += l[i]
+    else:
+        sum = l[i]
+
+    if sum > max:
+        max = sum
+print(l)
+print(max)
 """
