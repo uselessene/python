@@ -1,3 +1,4 @@
+# Двумерные массивы
 """
 with open ("39762.txt", "r") as f:
     n = f.readlines()
