@@ -1,94 +1,63 @@
-# Задание 1. Черепашка с путем наоборот
+# Рекурсивные функции
+# Задание 1. Функция факториала числа
 """
-import csv
-with open("36031.csv", "r") as f:
-    n = list(csv.reader(f))
-    l = []
-    for i in range(len(n)):
-        a = (n[i][0].split(';'))
-        a = [int(el) for el in a]
-        l.append(a)
-
-coins = l[-1::-1]
-for i in range(len(coins)):
-    coins[i] = coins[i][-1::-1]
-put = []
-
-for i in range(len(coins)):
-    for j in range(len(coins[i])):
-        if i == 0 and j == 0:
-            continue
-        elif i == 0:
-            coins[i][j] = coins[i][j] + coins[i][j - 1]
-            put.append("влево")
-        elif j == 0:
-            coins[i][j] = coins[i][j] + coins[i - 1][j]
-            put.append("вверх")
-        else:
-            if coins[i - 1][j] > coins[i][j - 1]:
-                coins[i][j] = coins[i - 1][j] + coins[i][j]
-                put.append("вверх")
-            else:
-                coins[i][j] = coins[i][j - 1] + coins[i][j]
-                put.append("влево")
-
-resultat = coins[i][j]
-
-print(resultat)
-print(put)
+def factorial(n):
+    if n > 1:
+        return n * factorial(n - 1)
+    return 1
+print(factorial(8))
 """
 
-# Задание 2. Среди семи чисел совпадают четыре числа.
-# Среднее значение неповторяющихся чисел больше суммы повторяющихся чисел.
+# Задание 2. Функция, которая принимает и возвращает согласные буквы
 """
-import csv
-with open("59778.csv", "r") as f:
-    n = list(csv.reader(f))
-    l = []
+def remove_vowels(string):
+    bukvi = "aeiouAEIOU"
 
-    for i in range(len(n)):
-        a = (n[i][0].split(';'))
-        a = [int(el) for el in a]
-        l.append(a)
-    a = l
-    count = 0
+    if len(string) == 0:
+        return ""
+    stroka = string[0]
+    srez = string[1:]
 
-    for i in range(len(a)):
-        for j in range(len(a[i])):
-            if a[i].count(a[i][j]) == 4:
-                repeat = a[i][j]
-                x = []
-                for j in range(len(a[i])):
-                    if a[i][j] not in x and a[i][j] != repeat:
-                        x.append(a[i][j])
-                summa_repeat = 4 * repeat
-                average_sum = sum(x) / 3
-                if average_sum > summa_repeat:
-                    count += 1
-    print(count // 4)
-"""
-
-# Задание 3. Максимальная сумма последовательных вещественных чисел
-"""
-import csv
-with open("29666.csv", "r") as f:
-    n = list(csv.reader(f))
-    l = []
-    for i in range(len(n)):
-        n[i] = float(n[i][0] + "." + n[i][1])
-        l.append(n[i])
-
-max = l[0]
-sum = l[0]
-
-for i in range(len(n)):
-    if l[i] < l[i - 1]:
-       sum += l[i]
+    if stroka in bukvi:
+        return remove_vowels(srez)
     else:
-        sum = l[i]
+        return stroka + remove_vowels(srez)
+print(remove_vowels("Hello PineApple Apple Pen"))
+"""
 
-    if sum > max:
-        max = sum
-print(l)
-print(max)
+# Задание 3. Функция вывода строки треугольника Паскаля
+"""
+def pascal(n):
+    if n == 1:
+        return [1]
+    prev = pascal(n - 1)
+    stroka = [1]
+
+    for i in range(len(prev) - 1):
+        stroka.append(prev[i] + prev[i + 1])
+
+    stroka.append(1)
+    return stroka
+print(pascal(10))
+"""
+
+# Задание 4. Лабиринт для героя
+"""
+def solve(maze):
+    koordinata_x = 0
+    koordinata_y = 0
+    for y in range(len(maze)):
+        for x in range(len(maze[0])):
+            if maze[y][x] == 's':
+                koordinata_x = x
+                koordinata_y = y
+
+robottut = []
+maze = [
+    's----',
+    '##---',
+    '---##',
+    '----x'
+]
+print(solve(maze))
 """
