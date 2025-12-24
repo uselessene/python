@@ -1,112 +1,78 @@
-# Задание 1. Число Фибоначчи
+# Двумерные массивы
 """
-N = int(input())
-if (n <= 0):
-    print("oshibka")
-else:
-    l = [0, 1]
-    
-    for i in range(n - 2):
-        new = l[0] + l[1]
-        l[0] = l[1]
-        l[1] = new
-    print(new)
+with open ("39762.txt", "r") as f:
+    n = f.readlines()
+    n = [int(el) for el in n]
+print(n)
 """
 
-# Задание 2. Кузнечик и способы
+# Задание 1
 """
-n = int(input())
-if n <= 0:
-    print("oshibka")
-elif n == 1:
-    print("1 sposob")
-elif n == 2:
-    print("2 sposoba")
-elif n == 3:
-    print("4 sposoba")
-else:
-    l = [1, 2, 4]
-    for i in range(n - 3):
-        new = l[0] + l[1] + l[2]
-        l[0] = l[1]
-        l[1] = l[2]
-        l[2] = new
-    print(l[2], "sposobov")
+with open ("39762.txt", "r") as f:
+    n = f.readlines()
+    n = [int(el) for el in n]
+count = 0
+max_summa = 0
+for i in range(len(n) - 1):
+    if ((n[i] * n[i + 1]) % 15) == 0 and ((n[i] + n[i + 1]) % 7) == 0:
+        count += 1
+        if max_summa < n[i] + n[i + 1]:
+            max_summa = n[i] + n[i + 1]
+print(count, max_summa)
 """
 
-# Задание 3. Черепашка и монеты
+# Задание 2
 """
-coins = [[0, 1, 1, 1, 1, 1],
-        [0, 0, 0, 0, 0, 1],
-        [0, 40, 70, 0, 0, 1],
-        [100, 0, 0, 0, 0, 1]]
+with open ("68279.txt", "r") as f:
+    n = f.readlines()
+    n = (int(el) for el in f)
+    max_el = 0
 
-for i in range(len(coins)):
-    for j in range(len(coins[i])):
-        if i == 0 and j == 0:
-            continue
-        elif i == 0 and j != 0:
-            coins[i][j] = coins[i][j] + coins[i][j - 1]
-        elif i != 0 and j == 0:
-            coins[i][j] = coins[i][j] + coins[i - 1][j]
-        else:
-            coins[i][j] = max(coins[i - 1][j], coins[i][j - 1]) + coins[i][j]
-
-resultat = coins[len(coins)-1][len(coins[0])-1]
-print(resultat)
-"""
-
-# Задание 3.1. Черепашка и монеты с своим массивом
-"""
-coins = [[0, 0, 1, 0, 0, 2],
-        [2, 0, 100, 1, 0, 1],
-        [10, 0, 0, 80, 0, 1],
-        [1, 0, 8, 20, 1, 1]]
-
-for i in range(len(coins)):
-    for j in range(len(coins[i])):
-        if i == 0 and j == 0:
-            continue
-        elif i == 0 and j != 0:
-            coins[i][j] = coins[i][j] + coins[i][j - 1]
-        elif i != 0 and j == 0:
-            coins[i][j] = coins[i][j] + coins[i - 1][j]
-        else:
-            coins[i][j] = max(coins[i - 1][j], coins[i][j - 1]) + coins[i][j]
-
-resultat = coins[len(coins)-1][len(coins[0])-1]
-print(resultat)
+    for el in n:
+        if str(el)[-3:] == "562":
+            if max_el < el:
+                max_el = el
+    c = 0
+    n = []
+    max_sum = 0
+    for i in range(len(n)-3):
+        l = [n[i], n[i + 1], n[i + 2], n[i + 3]]
+        l5 = [el for el in l if len(str(el)) == 5]
+        lnot5 = [el for el in l if len(str(el)) != 5]
+        lcrat3 = [el for el in l if el % 3 == 0]
+        lcrat7 = [el for el in l if el % 7 == 0]
+        if len(l5) >= l and len(lnot5) >= 2:
+            if len (lcrat3) < len(lcrat7):
+                if sum(l) > max_el and sum(l) < max_el * 2:
+                    c += l
+                    if max_sum < sum(l):
+                        max_sum = sum(l)
+print(c, max_sum)
 """
 
-# Задание 3.2. Черепашка и монеты с выводом пцти
+# Задание 3
 """
-coins = [[0, 1, 1, 1, 1, 1],
-        [0, 0, 0, 0, 0, 1],
-        [0, 40, 70, 0, 0, 1],
-        [100, 0, 0, 0, 0, 1]]
+with open("40992.txt", "r") as f:
+    n = f.readlines()
+    n = [int(el) for el in n]
+sum = 0
+count1 = 0
 
-put = []
+for i in n:
+    if i % 2 == 1:
+        sum += i
+        count1 += 1
+srednee = sum / count1
+count = 0
+max_summa = 0
 
-for i in range(len(coins)):
-    for j in range(len(coins[i])):
-        if i == 0 and j == 0:
-            continue
-        elif i == 0:
-            coins[i][j] = coins[i][j] + coins[i][j - 1]
-            put.append("вправо")
-        elif j == 0:
-            coins[i][j] = coins[i][j] + coins[i - 1][j]
-            put.append("вниз")
-        else:
-            if coins[i - 1][j] > coins[i][j - 1]:
-                coins[i][j] = coins[i - 1][j] + coins[i][j]
-                put.append("вниз")
-            else:
-                coins[i][j] = coins[i][j - 1] + coins[i][j]
-                put.append("вправо")
+for i in range(len(n) - 1):
+    if (n[i] % 5 == 0) or (n[i + 1] % 5 == 0):
+        if (n[i] < srednee) or (n[i + 1] < srednee):
+            count += 1
+            s = n[i] + n[i + 1]
+            if s > max_summa:
+                max_summa = s
 
-resultat = coins[i][j]
-
-print(resultat)
-print(put)
+print(count, max_summa)
 """
