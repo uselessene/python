@@ -1,146 +1,89 @@
-# Рекурсивные функции
-
-# Задание 1. Исполнитель n преобразует число, записанное на экрне
-# У исполнителя есть три команды:
-# 1. Прибавить 1
-# 2. Прибавить 2
-# 3. Умножить на 2
+# Вложенные циклы, линейные алгоритмы
+# Задание 1. 123x5(15) + 1x233(15)
 """
-def komanda(n, nomer):
-    if nomer == 1:
-        return n + 1
-    if nomer == 2:
-        return n + 2
-    if nomer == 3:
-        return n * 2
+def perevesti(n):
+    alfavit = "0123456789ABCDE"
+    slovar = ""
+    while n > 0:
+        slovar = alfavit[n % 15] + slovar
+        n //= 15
+    return slovar
 
-def kolvo(start, finish):
-    if start > finish:
-        return 0
-    if start == finish:
-        return 1
-    return (kolvo(komanda(start, 1), finish) + kolvo(komanda(start, 2), finish) + kolvo(komanda(start, 3), finish))
+for x in "0123456789ABCDE":
+    n1 = "123" + x + "5"
+    n2 = "1" + x + "233"
 
-otvet = kolvo(3, 10) * kolvo(10, 12)
+    a = int(n1, 15)
+    b = int(n2, 15)
+    otvet = a + b
 
-print(kolvo(3, 10))
-print(kolvo(10, 12))
-print(otvet)
+    if otvet % 14 == 0:
+        print(perevesti(otvet // 14))
+        break
 """
 
-# Задание 2. Исполнитель f преобразует число на экране
-# У исполнителя f две команды:
-# 1. Прибавь 1
-# 2. Сделай нечетное
+# Задание 2. AB267D1p + F024A89p
 """
-def komanda(f, nomer):
-    if nomer == 1:
-        return f + 1
-    if nomer == 2:
-        return 2 * f + 1
+for p in range(16, 100):
+    if 15 >= p:
+        continue
 
-def kolvo(start, finish):
-    if start == 26:
-        return 0
-    if start > finish:
-        return 0
-    if start == finish:
-        return 1
-    return (kolvo(komanda(start, 1), finish) + kolvo(komanda(start, 2), finish))
-    
-print(kolvo(1, 27))
+    n1 = (10 * p ** 6) + (11 * p ** 5) + (2 * p ** 4) + (6 * p ** 3) + (7 * p ** 2) + (13 * p ** 1) + (1 * p ** 9)
+    n2 = (15 * p ** 6) + (0 * p ** 5) + (2 * p ** 4) + (4 * p ** 3) + (10 * p ** 2) + (8 * p ** 1) + (9 * p ** 1)
+    otvet = n1 + n2
+
+    if otvet % (p - 1) == 0:
+        print(p)
+        break
 """
 
-# Задание 3. Исполнитель s преобразует число на экране
-# У исполнителя есть две команды:
-# 1. Прибавить 1
-# 2. Прибавить 2
+# Задание 3. xB09(17) + x8E8(15)
 """
-def komanda(s, nomer):
-    if nomer == 1:
-        return s + 1
-    if nomer == 2:
-        return s + 2
+for x in "0123456789":
+    n1 = x + "B09"
+    n2 = x + "8E8"
 
-def kolvo(start, finish):
-    if start == 14:
-        return 0
-    if start > finish:
-        return 0
-    if start == finish:
-        return 1
+    a = int(n1, 17)
+    b = int(n2, 15)
+    otvet = a + b
 
-    return (kolvo(komanda(start, 1), finish) + kolvo(komanda(start, 2), finish))
-
-otvet = kolvo(2, 9) * kolvo(9, 18)
-print(otvet)
+    if otvet % 155 == 0:
+        print(x)
+        print(otvet // 155)
+        break
 """
 
-# Обработка символьных строк
-# Задание 1. Определить длину самой длинной последовательности X
+# Задание 4. y04x5(11) + 253xy(8)
 """
-with open("27686.txt", "r") as f:
-    n = f.readlines()
-max = 0
-count = 0
+minimum = []
+for x in "01234567":
+    for y in "01234567":
 
-for i in n:
-    for symbol in i:
-        if symbol == 'X':
-            count += 1
-            if count > max:
-                max = count
-        else:
-            count = 0
-print(max) 
-"""
+        n1 = y + "04" + x + "5"
+        n2 = "253" + x + y
 
-# Задание 2. Максимальное количество идущих подряд символов без XZZY
-"""
-with open("36037.txt", "r") as f:
-    n = f.readlines()
-max = 0
-count = 0
-text = ""
+        a = int(n1, 11)
+        b = int(n2, 8)
+        otvet = a + b
 
-for i in n:
-    text += i
-
-for i in range(len(text) - 3):
-    if text[i] == 'X' and text[i + 1] == 'Z' and text[i + 2] == 'Z' and text[i + 3] == 'Y':
-        if count > max:
-            max = count
-        count = 3
-    else:
-        count += 1
-        if count > max:
-            max = count
-print(max)
+        if otvet % 117 == 0:
+            minimum.append(otvet)
+if minimum:
+    print(min(minimum) // 117)
 """
 
-# Задание 3. Количество групп из идущих подряд не менее 12 символов,
-# которые начинаются и заканчиваются буквой E и не содержат других букв E и букв F
+# Задание 5. 7 * 5121912 * 6 * 641954 − 5 * 81991 − 4 * 81980 − 2022
 """
-with open("46982.txt", "r") as f:
-    n = f.readlines()
+def perevesti(n):
+    alfavit = "01234567"
+    slovar = ""
+    while n > 0:
+        slovar = alfavit[n % 8] + slovar
+        n //= 8
+    return slovar
 
-s = []
-for i in n:
-    for j in i:
-        if j != "":
-            s.append(j)
-count = 0
-
-for i in range(len(s)):
-    if s[i] == "E":
-        for j in range(i + 1, len(s)):
-            if s[j] == "F":
-                break
-
-            if s[j] == "E":
-                dlina = j - i + 1
-                if dlina >= 12:
-                    count = count + 1
-                break
-print(count)
+otvet = 7 * (512 ** 1912) + 6 * (64 ** 1954) - 5 * (8 ** 1991) - 4 * (8 ** 1980) - 2022
+vosem = perevesti(otvet)
+kolvo = vosem.count("7")
+print(kolvo)
 """
