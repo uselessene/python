@@ -43,21 +43,44 @@ print(pascal(10))
 
 # Задание 4. Лабиринт для героя
 """
-def solve(maze):
-    koordinata_x = 0
-    koordinata_y = 0
-    for y in range(len(maze)):
-        for x in range(len(maze[0])):
-            if maze[y][x] == 's':
-                koordinata_x = x
-                koordinata_y = y
-
-robottut = []
 maze = [
     's----',
     '##---',
     '---##',
     '----x'
 ]
+def solve(m):
+    koordinata_x, koordinata_y = 0, 0
+    for j in range(len(m)):
+        for i in range(len(m[j])):
+            if m[j][i] == 's':
+                koordinata_x, koordinata_y = i, j
+
+    def robot(i, j, ko):
+        if j < 0 or i < 0 or j >= len(m) or i >= len(m[0]):
+            return None
+        if m[j][i] == '#' or [i, j] in ko:
+            return None
+        if m[j][i] == 'x':
+            return []
+        ko = ko + [[i, j]]
+        
+        otvet = robot(i + 1, j, ko)
+        if otvet is not None:
+            return ['вправо'] + otvet
+
+        otvet = robot(i, j + 1, ko)
+        if otvet is not None:
+            return ['вниз'] + otvet
+
+        otvet = robot(i - 1, j, ko)
+        if otvet is not None:
+            return ['влево'] + otvet
+
+        otvet = robot(i, j - 1, ko)
+        if otvet is not None:
+            return ['вверх'] + otvet
+        return None
+    return robot(koordinata_x, koordinata_y, [])
 print(solve(maze))
 """
